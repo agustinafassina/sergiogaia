@@ -100,7 +100,7 @@ return true;
               </td>
               <td><?php echo $row['titulo'] ?></td>
               <td><?php echo substr($row['detalle'],0,400); ?>....</td>
-               <td><a href="http://www.gaiaespacioholistico.com/verdetalle.php?id=<?php echo $id ;?>" target="_blank"><b>ABRIR NOVEDAD</b></a></td>
+               <td><a href="http://www.gaiaespacioholistico.com/novedades.php?novedad=<?php echo $row['link_novedad'] ;?>" target="_blank"><b>ABRIR NOVEDAD</b></a></td>
               <td>
                 <?php if($row['imagen'] !== 'novedades/'){?>
                 <img src="<?php echo $row['imagen'] ?>" style="width:40%">

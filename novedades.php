@@ -198,34 +198,44 @@ function MM_swapImage() { //v3.0
          <!-- FIRST BLOCK --> 	
          <div id="first-block">
             <div class="line">
-               <h1><strong>NOVEDADES</strong></h1>
+               <!--Section detalle de la novedad-->
                <?php 
-		            $sql = "SELECT * FROM novedades ORDER by fecha desc";
-		            // mysqli_set_charset($con, "utf8");
-		            if (!$result=mysqli_query($con,$sql));
-                  while($row = mysqli_fetch_array($result)){
-              	   $id = $row['id'];
+                  $novedad = $_GET['novedad'];
+                  if($novedad != ''){
+                     $textNovedades= "NOVEDAD";
+                     $sql = "SELECT * FROM novedades where link_novedad='".$novedad."' ORDER by fecha desc";
+                  }else{
+                     $textNovedades= "NOVEDADES";
+                     $sql = "SELECT * FROM novedades ORDER by fecha desc";
+                  }
+                  // mysqli_set_charset($con, "utf8");
                ?>
-               <div class="margin">
-               	 
-               <div class="s-12 l-5">
-                <?php if($row['imagen'] !== 'novedades/'){?>
-               		<img src="panel/<?php echo $row['imagen'] ?>" alt="<?php echo $row['titulo'] ?>" class="imagen">
-                <?php }else if($row['link'] !== ''){?>
-                <div class="video-container">
-                <iframe width="433" height="253" src="<?php echo $row['link'];?>" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <?php } ?>
-               </div>
-               <div class="s-12 l-7">
-                  <h4><?php echo $row['titulo'] ?></h4>
-                   <p><?php 
-                   $texto = $row['detalle'];
-                    echo substr($texto,0,200).'...... <div class="botonmas"><a href="verdetalle.php?id='.$row['id'].'">ver más</a></div>'; ?></p>
-               </div>
-                 </div>
-            	<?php }?>
+               <!--Section novedades-->
+                  <?php
+                     if (!$result=mysqli_query($con,$sql));
+                     if(mysqli_num_rows($result)==0){
+                        echo "<h1><strong>NOT FOUND</strong></h1>";
+                     }
+                     while($row = mysqli_fetch_array($result)) {
+                  ?>
+                  <h1><strong><?php echo $textNovedades;?></strong></h1>
+                  <div class="margin">
+                     <div class="s-12 l-5">
+                        <?php if($row['imagen'] !== 'novedades/'){?>
+                           <img src="panel/<?php echo $row['imagen'] ?>" alt="<?php echo $row['titulo'] ?>" class="imagen">
+                        <?php }else if($row['link'] !== ''){?>
+                           <div class="video-container">
+                           <iframe width="433" height="253" src="<?php echo $row['link'];?>" frameborder="0" allowfullscreen></iframe>
+                           </div>
+                        <?php } ?>
                      </div>
+                     <div class="s-12 l-7">
+                        <h4><?php echo $row['titulo'] ?></h4>
+                        <p><?php echo substr($row['detalle'],0,200).'...... <div class="botonmas"><a href="novedades.php?novedad='.$row['link_novedad'].'">ver más</a></div>'; ?></p>
+                     </div>
+                  </div>
+               <?php }?>
+            </div>
       </section>
       <!-- FOOTER -->   
       <footer>

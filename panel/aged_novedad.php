@@ -49,9 +49,9 @@ $upload="novedades/".$archivo;
  
 if ($idea){ 
   if($upload == 'novedades/'){
-  $sql3 = "UPDATE novedades SET titulo='$titulo', detalle='$descripcion', link='$link', link_novedad='$linkNovedad' where id='$idea'";
+  $sql3 = "UPDATE novedades SET titulo='$titulo', detalle='$descripcion', link='$link', link_novedad='$linkNovedad', fecha='$fechaDate' where id='$idea'";
   }elseif ($upload != 'novedades/') {
-    $sql3 = "UPDATE novedades SET titulo='$titulo', imagen='$upload', detalle='$descripcion, link='$link', link_novedad='$linkNovedad' where id='$idea'";
+    $sql3 = "UPDATE novedades SET titulo='$titulo', imagen='$upload', detalle='$descripcion, link='$link', link_novedad='$linkNovedad', fecha='$fechaDate' where id='$idea'";
   }
   //echo $sql;
 
