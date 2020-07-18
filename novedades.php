@@ -1,5 +1,17 @@
 <?php require('controlador/coneccion.php');
 error_reporting();
+$novedad = $_GET['novedad'];
+if($novedad != ''){
+   $textNovedades= "NOVEDAD";
+   $sql = "SELECT * FROM novedades where link_novedad='".$novedad."' ORDER by fecha desc";
+}else{
+   $textNovedades= "NOVEDADES";
+   $sql = "SELECT * FROM novedades ORDER by fecha desc";
+}
+if (!$result=mysqli_query($con,$sql));
+if(mysqli_num_rows($result)==0){
+   echo "<h1><strong>NOT FOUND</strong></h1>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -7,17 +19,28 @@ error_reporting();
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>GAIA Espacio Holístico - Centro Psicológico y Multidisciplinario</title>
-   <!--   <meta name="description" content="Gaia Espacio Holístico es un centro psicológico y multidisciplinario coordinado por la Lic. en Psicología María Paz Luján Pérez. Actividades: Psicología, Yoga, Alimentación Consciente y otras terapias."/>
-<meta name="keywords" content="Gaia, Córdoba, espacio holístico, psicoterapia, nutrición, psicología, yoga, Gaia espacio holístico, yoga córdoba, psicoterapia holística, centro psicológico, centro multidisciplinario"/>
 
-<meta property="og:locale" content="es_ES" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Novedades" />
-<meta property="og:description" content="Gaia Espacio Holístico es un centro psicológico y multidisciplinario coordinado por la Lic. en Psicología María Paz Luján Pérez. Actividades: Psicología, Yoga, Alimentación Consciente y otras terapias."/>
-<meta property="og:url" content="http://www.gaiaespacioholistico.com/novedades.php/" />
-<meta property="og:site_name" content="Gaia Espacio Holístico" />
-<meta property="og:image" content="http://www.gaiaespacioholistico.com/img/novedad2.jpg"/>-->
+      <?php if($textNovedades=="NOVEDAD"){
 
+         $sql1 = "SELECT * FROM novedades where link_novedad='".$novedad."' ORDER by fecha desc";
+         if (!$result1=mysqli_query($con,$sql1));
+         $rowt = mysqli_fetch_array($result1);
+         
+         if($rowt['link'] !== ''){
+            $img = $rowt['link']; ?>
+            <meta property="og:video" content="<?php echo $img;?>" />
+            <meta property="og:url" content="<?php echo $img;?>" />
+         <?php }else{
+         //  echo 'asqweqweqwed';
+            $img = 'https://www.gaiaespacioholistico.com/panel/'.$rowt['imagen'];?>
+            <meta property="og:image" content="<?php echo $img;?>" />
+            <meta property="og:url" content="https://www.gaiaespacioholistico.com/novedades.php?novedad=<?php echo $rowt['link_novedad'] ;?>" />
+         <?php } ?>
+            <meta property="og:url" content="https://www.gaiaespacioholistico.com/novedades.php?novedad=<?php echo $rowt['link_novedad'] ;?>" />
+            <meta property="og:type" content="Novedades" />
+            <meta property="og:title" content="<?php echo $rowt['titulo']; ?>" />
+            <meta property="og:description" content="<?php echo $rowt['detalle'];?>" />
+      <?php } ?>
       <link rel="stylesheet" href="css/components.css">
       <link rel="stylesheet" href="css/responsee.css">
       <link rel="stylesheet" href="owl-carousel/owl.carousel.css">
@@ -31,23 +54,23 @@ error_reporting();
       <script type="text/javascript" src="js/responsee.js"></script>   
       
       <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"  href="favicon/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-<link rel="manifest" href="favicon/manifest.json">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
-<script>
+   <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+   <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+   <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+   <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+   <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+   <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+   <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+   <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+   <link rel="icon" type="image/png" sizes="192x192"  href="favicon/android-icon-192x192.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+   <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+   <link rel="manifest" href="favicon/manifest.json">
+   <meta name="msapplication-TileColor" content="#ffffff">
+   <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+   <meta name="theme-color" content="#ffffff">
+   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -198,27 +221,12 @@ function MM_swapImage() { //v3.0
          <!-- FIRST BLOCK --> 	
          <div id="first-block">
             <div class="line">
-               <!--Section detalle de la novedad-->
-               <?php 
-                  $novedad = $_GET['novedad'];
-                  if($novedad != ''){
-                     $textNovedades= "NOVEDAD";
-                     $sql = "SELECT * FROM novedades where link_novedad='".$novedad."' ORDER by fecha desc";
-                  }else{
-                     $textNovedades= "NOVEDADES";
-                     $sql = "SELECT * FROM novedades ORDER by fecha desc";
-                  }
-                  // mysqli_set_charset($con, "utf8");
-               ?>
+
                <!--Section novedades-->
                   <?php
-                     if (!$result=mysqli_query($con,$sql));
-                     if(mysqli_num_rows($result)==0){
-                        echo "<h1><strong>NOT FOUND</strong></h1>";
-                     }
+                     echo "<h1><strong>$textNovedades</strong></h1>";
                      while($row = mysqli_fetch_array($result)) {
                   ?>
-                  <h1><strong><?php echo $textNovedades;?></strong></h1>
                   <div class="margin">
                      <div class="s-12 l-5">
                         <?php if($row['imagen'] !== 'novedades/'){?>
@@ -231,7 +239,23 @@ function MM_swapImage() { //v3.0
                      </div>
                      <div class="s-12 l-7">
                         <h4><?php echo $row['titulo'] ?></h4>
-                        <p><?php echo substr($row['detalle'],0,200).'...... <div class="botonmas"><a href="novedades.php?novedad='.$row['link_novedad'].'">ver más</a></div>'; ?></p>
+                        <p><?php
+                        if ($novedad != '') {?>
+                           <?php echo $row['detalle'];?>
+                           <div id="fb-root"></div>
+                           <script>(function(d, s, id) {
+                              var js, fjs = d.getElementsByTagName(s)[0];
+                              if (d.getElementById(id)) return;
+                              js = d.createElement(s); js.id = id;
+                              js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10';
+                              fjs.parentNode.insertBefore(js, fjs);
+                              }(document, 'script', 'facebook-jssdk'));
+                           </script>
+
+                           <div class="fb-share-button" data-href="https://www.gaiaespacioholistico.com/novedades.php?novedad=<?php echo $row['link_novedad'];?>" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Compartir</a></div>
+                        <?php }else{
+                           echo substr($row['detalle'], 0, 200).'...... <div class="botonmas"><a href="novedades.php?novedad='.$row['link_novedad'].'">ver más</a></div>';
+                        }?></p>
                      </div>
                   </div>
                <?php }?>

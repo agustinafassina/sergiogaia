@@ -30,8 +30,8 @@ if($row1 == 0){
       <?php 
         if($row['link'] !== ''){
           $img = $row['link'];?>
-          <meta property="og:video" content="<?php echo $img;?>" />
-          <meta property="og:url" content="<?php echo $img;?>" />
+          <meta property="og:video" content="<?php echo $row['link'];?>" />
+          <meta property="og:url" content="<?php echo $row['link'];?>" />
         <?php }else{
         //  echo 'asqweqweqwed';
           $img = 'http://www.gaiaespacioholistico.com/panel/'.$row['imagen'];?>
