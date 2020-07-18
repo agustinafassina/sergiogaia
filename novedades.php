@@ -36,7 +36,7 @@ if(mysqli_num_rows($result)==0){
             <meta property="og:image" content="<?php echo $img;?>" />
             <meta property="og:url" content="https://www.gaiaespacioholistico.com/novedades.php?novedad=<?php echo $rowt['link_novedad'] ;?>" />
          <?php } ?>
-            <meta property="og:url" content="https://www.gaiaespacioholistico.com/novedades.php?novedad=<?php echo $rowt['link_novedad'] ;?>" />
+            <!--<meta property="og:url" content="https://www.gaiaespacioholistico.com/novedades.php?novedad=<?php echo $rowt['link_novedad'] ;?>" />-->
             <meta property="og:type" content="Novedades" />
             <meta property="og:title" content="<?php echo $rowt['titulo']; ?>" />
             <meta property="og:description" content="<?php echo $rowt['detalle'];?>" />
@@ -239,20 +239,27 @@ function MM_swapImage() { //v3.0
                      </div>
                      <div class="s-12 l-7">
                         <h4><?php echo $row['titulo'] ?></h4>
-                        <p><?php
+                        <p style="text-align:left"><?php
                         if ($novedad != '') {?>
                            <?php echo $row['detalle'];?>
-                           <div id="fb-root"></div>
-                           <script>(function(d, s, id) {
-                              var js, fjs = d.getElementsByTagName(s)[0];
-                              if (d.getElementById(id)) return;
-                              js = d.createElement(s); js.id = id;
-                              js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10';
-                              fjs.parentNode.insertBefore(js, fjs);
-                              }(document, 'script', 'facebook-jssdk'));
-                           </script>
-
-                           <div class="fb-share-button" data-href="https://www.gaiaespacioholistico.com/novedades.php?novedad=<?php echo $row['link_novedad'];?>" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Compartir</a></div>
+                           <div class="margin">
+                              <div class="s-12 l-6">
+                                 <div id="fb-root"></div>
+                                 <script>(function(d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0];
+                                    if (d.getElementById(id)) return;
+                                    js = d.createElement(s); js.id = id;
+                                    js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10';
+                                    fjs.parentNode.insertBefore(js, fjs);
+                                    }(document, 'script', 'facebook-jssdk'));
+                                 </script>
+                                 <div class="fb-share-button" data-href="https://www.gaiaespacioholistico.com/novedades.php?novedad=<?php echo $row['link_novedad'];?>" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Compartir</a></div>
+                              </div>
+                              <div class="s-12 l-6">                                 
+                                 <a href="https://api.whatsapp.com/send?text=https://www.gaiaespacioholistico.com/novedades.php?novedad=<?php echo $row['link_novedad'];?>" data-action="share/whatsapp/share">
+                                    <img src="img/whatsap.jpg" style="width:30px;height:30px">
+                                 </a>
+                              </div>   
                         <?php }else{
                            echo substr($row['detalle'], 0, 200).'...... <div class="botonmas"><a href="novedades.php?novedad='.$row['link_novedad'].'">ver más</a></div>';
                         }?></p>
