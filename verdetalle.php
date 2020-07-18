@@ -228,31 +228,31 @@ function MM_swapImage() { //v3.0
                <div class="margin">
                <!--Agusssssssss -->
                <div class="s-12 l-5">
-                <?php if($row['imagen'] !== 'novedades/'){?>
+                  <?php if($row['imagen'] !== 'novedades/'){?>
                		<img src="panel/<?php echo $row['imagen'];?>" alt="<?php echo $row['titulo'] ?>" class="imagen">
-                <?php }else if($row['link'] !== ''){?>
-                <div class="video-container">
-                <iframe width="433" height="253" src="<?php echo $row['link'];?>" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <?php } ?>
+                  <?php } else if($row['link'] !== ''){?>
+                     <div class="video-container">
+                        <iframe width="433" height="253" src="<?php echo $row['link'];?>" frameborder="0" allowfullscreen></iframe>
+                     </div>
+                  <?php } ?>
                </div>
                <div class="s-12 l-7">
-                  <h4><?php echo $row['titulo'] ?></h4>
-                   <p><?php 
-                   $texto = $row['detalle'];
-                    echo $texto; ?></p>
+                  <h4><?php echo $row['titulo']; ?></h4>
+                  <p><?php echo $row['detalle']; ?></p>
                </div>
                <div id="fb-root"></div>
-                <script>(function(d, s, id) {
+               <script>(function(d, s, id) {
                   var js, fjs = d.getElementsByTagName(s)[0];
                   if (d.getElementById(id)) return;
                   js = d.createElement(s); js.id = id;
                   js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10';
                   fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));</script>
+                  }(document, 'script', 'facebook-jssdk'));
+               </script>
 
-                <div class="fb-share-button" data-href="http://www.gaiaespacioholistico.com/verdetalle.php?id=<?php echo $row['id'];?>" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Compartir</a></div>
-                 </div>
+               <div class="fb-share-button" data-href="http://www.gaiaespacioholistico.com/verdetalle.php?id=<?php echo $row['id'];?>" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Compartir</a></div>
+               <!--<a href="whatsapp://send?text=URL" data-action="share/whatsapp/share"><img src="img/whatsapp.png" style="width:40%"></a>-->
+               </div>
             	<?php }?>
                      </div>
       </section>

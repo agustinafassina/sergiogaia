@@ -26,7 +26,7 @@ else {
 include('cabecera.php');
 
 ?>
-<script type="text/javascript" src="agregartexto/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 <div id="content-wrapper">
 <script type="text/javascript">
     $(document).ready(function() {
@@ -96,14 +96,14 @@ return true;
                 ?>
             <tr>
               <td  style="width: 12%">
-                <?php echo date("d-m-Y", strtotime($row['fecha'])) ?><br>
+                <?php echo date("d-m-Y h:i:s", strtotime($row['fecha'])) ?><br>
               </td>
               <td><?php echo $row['titulo'] ?></td>
-              <td><?php echo $row['detalle'] ?></td>
+              <td><?php echo substr($row['detalle'],0,400); ?>....</td>
                <td><a href="http://www.gaiaespacioholistico.com/verdetalle.php?id=<?php echo $id ;?>" target="_blank"><b>ABRIR NOVEDAD</b></a></td>
               <td>
                 <?php if($row['imagen'] !== 'novedades/'){?>
-                <img src="<?php echo $row['imagen'] ?>" style="width:50%">
+                <img src="<?php echo $row['imagen'] ?>" style="width:40%">
                 Sin video.
                 <?php }else if($row['link'] !== ''){?>
                 Sin imagen.

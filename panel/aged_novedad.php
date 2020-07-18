@@ -33,8 +33,9 @@ $descripcion = $_POST['descripcion'];
 $idea = $_POST['idea']; 
 $archi = $_POST['archivo']; 
 $link = $_POST['link'];
-//echo $idea;
-$fechaDate = date("Y-m-d");
+
+$linkNovedad = str_replace(' ','-',$titulo);
+$fechaDate = date("Y-m-d h:i:s");
 if($titulo){
 if($archi){
   $archivo = $archi;
@@ -48,9 +49,9 @@ $upload="novedades/".$archivo;
  
 if ($idea){ 
   if($upload == 'novedades/'){
-  $sql3 = "UPDATE novedades SET titulo='$titulo', detalle='$descripcion', link='$link' where id='$idea'";
+  $sql3 = "UPDATE novedades SET titulo='$titulo', detalle='$descripcion', link='$link', link_novedad='$linkNovedad' where id='$idea'";
   }elseif ($upload != 'novedades/') {
-    $sql3 = "UPDATE novedades SET titulo='$titulo', imagen='$upload', detalle='$descripcion, link='$link' where id='$idea'";
+    $sql3 = "UPDATE novedades SET titulo='$titulo', imagen='$upload', detalle='$descripcion, link='$link', link_novedad='$linkNovedad' where id='$idea'";
   }
   //echo $sql;
 
@@ -58,13 +59,13 @@ if ($idea){
   echo "<script>alert('Novedad actualizada con éxito!');window.location.href='vernovedades.php';</script>";
 }else{ 
 if (move_uploaded_file($_FILES['archivo']['tmp_name'],$upload)){
-  $insert = mysqli_query($con, "INSERT INTO novedades (titulo, detalle, imagen, fecha) VALUES ('$titulo', '$descripcion', '$upload', '$fechaDate')");
+  $insert = mysqli_query($con, "INSERT INTO novedades (titulo, detalle, imagen, fecha, link_novedad) VALUES ('$titulo', '$descripcion', '$upload', '$fechaDate', '$linkNovedad')");
   //echo $insert;
  echo "<script>alert('Novedad agregada con éxito!');window.location.href='vernovedades.php';</script>";
  //echo "aca";
  //$rs = mysqli_query($con,$sql3);
  }else{
-  $insert = mysqli_query($con, "INSERT INTO novedades (titulo, detalle, imagen, fecha, link) VALUES ('$titulo', '$descripcion', '$upload', '$fechaDate', '$link')");
+  $insert = mysqli_query($con, "INSERT INTO novedades (titulo, detalle, imagen, fecha, link, link_novedad) VALUES ('$titulo', '$descripcion', '$upload', '$fechaDate', '$link', '$linkNovedad')");
   //echo $insert;
   //echo "por este el ultimoooo";
  echo "<script>alert('Novedad agregada con éxito!');window.location.href='vernovedades.php';</script>";
@@ -73,19 +74,6 @@ if (move_uploaded_file($_FILES['archivo']['tmp_name'],$upload)){
 }
 }
 ?>
-<script type="text/javascript">
-		$(document).ready(function(){
-			$('#descripcion').Editor();
-
-			$('#descripcion').Editor('setText', ['<p style="color:red;">Hola</p>']);
-
-			$('#btn-enviar').click(function(e){
-				e.preventDefault();
-				$('#descripcion').text($('#descripcion').Editor('getText'));
-				$('#frm-test').submit();				
-			});
-		});	
-	</script>
 <div style=" padding:5px; margin:5px; ">  
  <div class="modal-dialog">
     <div class="modal-content">
@@ -100,9 +88,9 @@ if (move_uploaded_file($_FILES['archivo']['tmp_name'],$upload)){
         </div>      
         <div class="form-group">
           Detalle novedad:
-            <textarea cols="80" id="descripcion<?php //echo $id ?>" name="descripcion" rows="10"><?php echo $row1['detalle']?></textarea>
-          <!--<script type="text/javascript">
-          CKEDITOR.replace('descripcion<?php //echo $id ?>');-->
+            <textarea cols="80" id="descripcion<?php echo $id ?>" name="descripcion" rows="10"><?php echo $row1['detalle']?></textarea>
+          <script type="text/javascript">
+          CKEDITOR.replace('descripcion<?php echo $id ?>');
           </script>
         </div>
         <div class="form-group">    

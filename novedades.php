@@ -201,13 +201,11 @@ function MM_swapImage() { //v3.0
                <h1><strong>NOVEDADES</strong></h1>
                <?php 
 		            $sql = "SELECT * FROM novedades ORDER by fecha desc";
-		           // mysqli_set_charset($con, "utf8");
-
-		           if (!$result=mysqli_query($con,$sql));
-             
-        		   while($row = mysqli_fetch_array($result)){
-              	   $id =$row['id'];
-                ?>
+		            // mysqli_set_charset($con, "utf8");
+		            if (!$result=mysqli_query($con,$sql));
+                  while($row = mysqli_fetch_array($result)){
+              	   $id = $row['id'];
+               ?>
                <div class="margin">
                	 
                <div class="s-12 l-5">
